@@ -8,13 +8,15 @@ def pascal_triangle(n):
     """
     Generates Pascal's Triangle up to the nth row.
 
-    Pascal's Triangle is a triangular array of binomial coefficients, where the first
-    and last elements of each row are 1, and each interior element is the sum of the
+    Pascal's Triangle is a triangular array of binomial
+    coefficients, where the first and last elements of
+    each row are 1, and each interior element is the sum of the
     two elements directly above it.
 
     :param n: An integer representing the number of rows in the triangle.
               Must be greater than 0.
-    :return: A list of lists, where each inner list represents a row of Pascal's Triangle.
+    :return: A list of lists, where each inner list represents a row of
+             Pascal's Triangle.
              Returns an empty list if n is 0 or less.
 
     Example:
