@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+Module containing pascal's triangle function
+"""
+
+
 def pascal_triangle(n):
     """
     Generates Pascal's Triangle up to the nth row.
