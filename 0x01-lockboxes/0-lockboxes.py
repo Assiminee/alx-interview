@@ -3,8 +3,11 @@
 Lockbox algorithm
 """
 
+
 def canUnlockAll(boxes):
-    """ Determines if all boxes can be unlocked """
+    """
+    Determines if all boxes can be unlocked
+    """
     keys = [0]
     for key in keys:
         for boxKey in boxes[key]:

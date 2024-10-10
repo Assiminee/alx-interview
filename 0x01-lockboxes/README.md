@@ -17,3 +17,51 @@ Your goal is to write a function `canUnlockAll(boxes)` that checks if you can un
 ```python
 def canUnlockAll(boxes):
     """ Determines if all boxes can be unlocked """
+```
+
+### Input
+- boxes: A list of lists. Each element in boxes is a list of keys contained in that box.
+### Output
+- True if all boxes can be unlocked, otherwise False.
+
+### Example
+```python
+boxes = [[1], [2], [3], [4], []]
+print(canUnlockAll(boxes))  # Output: True
+
+boxes = [[1, 3], [3, 0, 1], [2], [0]]
+print(canUnlockAll(boxes))  # Output: True
+
+boxes = [[1, 2], [2], [3], [], [0]]
+print(canUnlockAll(boxes))  # Output: False
+```
+
+### Algorithm
+The function works as follows:
+
+Start with the first unlocked box (box 0) and retrieve the keys inside it.
+Use the keys to open other boxes.
+Keep track of the opened boxes and continue retrieving new keys until no more boxes can be opened.
+Return True if all boxes are opened, otherwise return False.
+
+### Usage
+You can run the function by importing it in a Python script or calling it in the Python interpreter.
+```bash
+$ python main.py
+```
+Where main contains the following code:
+```python
+#!/usr/bin/python3
+
+canUnlockAll = __import__('0-lockboxes').canUnlockAll
+
+boxes = [[1], [2], [3], [4], []]
+print(canUnlockAll(boxes)) # Output: True
+
+boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
+print(canUnlockAll(boxes)) # Output: True
+
+boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
+print(canUnlockAll(boxes)) # Output: False
+```
+
