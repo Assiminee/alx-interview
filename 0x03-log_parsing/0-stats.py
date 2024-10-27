@@ -4,40 +4,41 @@ Prints metrics based on input from stdin
 """
 import sys
 
-status_codes = {'200': 0, '301': 0, '400': 0, '401': 0,
-                '403': 0, '404': 0, '405': 0, '500': 0}
-total_size = 0
-counter = 0
+
+def print_stats(size, stat_codes):
+    """Prints stats"""
+    print('File size: {}'.format(size))
+
+    for key, val in stat_codes.items():
+        if val != 0:
+            print('{}: {}'.format(key, val))
 
 
-def print_metrics():
-    '''Prints the metrics'''
-    print('File size: {}'.format(total_size))
-    for key, value in sorted(status_codes.items()):
-        if value != 0:
-            print('{}: {}'.format(key, value))
+file_size = 0
+stats = {
+    '200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
+    '404': 0, '405': 0, '500': 0
+}
 
+count = 0
 
 try:
     for line in sys.stdin:
-        parts = line.split()
-        if len(parts) > 4:
-            try:
-                code = parts[-2]
-                size = int(parts[-1])
-                if code in status_codes:
-                    status_codes[code] += 1
-                total_size += size
-                counter += 1
-            except (IndexError, ValueError):
-                continue
+        line_parts = line.split()
 
-        if counter == 10:
-            print_metrics()
-            counter = 0
+        if len(line_parts) > 2:
+            count += 1
 
-except KeyboardInterrupt:
-    print_metrics()
-    sys.exit(0)
+            if count <= 10:
+                file_size += int(line_parts[-1])
+                code = line_parts[-2]
 
-print_metrics()
+                if code in stats.keys():
+                    stats[code] += 1
+
+            if count == 10:
+                print_stats(file_size, stats)
+                count = 0
+
+finally:
+    print_stats(file_size, stats)
