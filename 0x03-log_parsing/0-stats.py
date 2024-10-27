@@ -38,3 +38,5 @@ try:
 except KeyboardInterrupt:
     print_metrics()
     sys.exit(0)
+
+print_metrics()
