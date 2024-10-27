@@ -36,7 +36,4 @@ try:
             counter = 0
 
 except KeyboardInterrupt:
-    print_metrics()
     sys.exit(0)
-
-print_metrics()
