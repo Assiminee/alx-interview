@@ -1,75 +1,69 @@
-#!/usr/bin/python3
-"""
-0x05-Nqueens
-"""
+#!/usr/bin/env python3
+"""N Queens puzzle solver"""
 import sys
 
 
-def is_safe(board, row, col, n):
-    # Check this row on the left side
-    for i in range(col):
-        if board[row][i] == 'Q':
+def print_solution(board):
+    """Print the board in the required format"""
+    solution = []
+    for row in range(len(board)):
+        for col in range(len(board)):
+            if board[row][col] == 1:
+                solution.append([row, col])
+    print(solution)
+
+
+def is_safe(board, row, col, N):
+    """Check if placing a queen at (row, col) is safe"""
+    # Check the column on the left
+    for i in range(row):
+        if board[i][col] == 1:
             return False
 
-    # Check upper diagonal on the left side
-    i = row
-    j = col
-    while i >= 0 and j >= 0:
-        if board[i][j] == 'Q':
+    # Check the upper-left diagonal
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
             return False
-        i -= 1
-        j -= 1
 
-    # Check lower diagonal on the left side
-    i = row
-    j = col
-    while i < n and j >= 0:
-        if board[i][j] == 'Q':
+    # Check the upper-right diagonal
+    for i, j in zip(range(row, -1, -1), range(col, N)):
+        if board[i][j] == 1:
             return False
-        i += 1
-        j -= 1
 
     return True
 
 
-def solve_n_queens(n):
-    board = [['.' for _ in range(n)] for _ in range(n)]
-    solutions = []
+def solve_nqueens(board, row, N):
+    """Use backtracking to find all solutions"""
+    if row == N:
+        print_solution(board)
+        return
 
-    def backtrack(col):
-        if col == n:
-            solutions.append([[i, row.index('Q')]
-                              for i, row in enumerate(board)])
-            return
-
-        for i in range(n):
-            if is_safe(board, i, col, n):
-                board[i][col] = 'Q'
-                backtrack(col + 1)
-                board[i][col] = '.'
-
-    backtrack(0)
-    return solutions
+    for col in range(N):
+        if is_safe(board, row, col, N):
+            board[row][col] = 1
+            solve_nqueens(board, row + 1, N)
+            board[row][col] = 0  # Backtrack
 
 
 def main():
+    """Main function to handle input and initialize the board"""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
 
     try:
-        n = int(sys.argv[1])
+        N = int(sys.argv[1])
     except ValueError:
         print("N must be a number")
         sys.exit(1)
 
-    if n < 4:
+    if N < 4:
         print("N must be at least 4")
         sys.exit(1)
 
-    solutions = solve_n_queens(n)
-    for solution in solutions:
-        print(solution)
+    board = [[0 for _ in range(N)] for _ in range(N)]
+    solve_nqueens(board, 0, N)
 
 
 if __name__ == "__main__":
