@@ -6,6 +6,7 @@ let child = exec("timeout 60s ./0-starwars_characters.js 3", function(error, std
   listCharacters = ["Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Organa", "Obi-Wan Kenobi", "Chewbacca", "Han Solo", "Jabba Desilijic Tiure", "Wedge Antilles", "Yoda", "Palpatine", "Boba Fett", "Lando Calrissian", "Ackbar", "Mon Mothma", "Arvel Crynyd", "Wicket Systri Warrick", "Nien Nunb", "Bib Fortuna"];
 
   stdoutLines = stdout.split("\n");
+	console.log(stdoutLines)
   for (let index = 0; (index < stdoutLines.length) && (listCharacters.length > 0); index++) {
       let line = stdoutLines[index];
       if (line != listCharacters[0]) {
