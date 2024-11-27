@@ -31,7 +31,7 @@ def makeChange(coins, total):
 
     return -1
 
-@lru_cache(maxsize=None)
+
 def makeChangeHelper(coins, total):
     """
     Helper method
