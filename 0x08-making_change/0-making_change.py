@@ -38,9 +38,11 @@ def makeChangeHelper(coins, total):
     change = 0
 
     for coin in coins:
-        while total >= coin:
-            total -= coin
-            change += 1
+        if total <= 0:
+            break
+        multiplier = total // coin
+        change += multiplier
+        total -= multiplier * coin
 
     if total != 0:
         return -1
