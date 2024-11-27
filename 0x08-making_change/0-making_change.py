@@ -2,7 +2,6 @@
 """
 Contains makeChange method
 """
-from functools import lru_cache
 
 
 def makeChange(coins, total):
